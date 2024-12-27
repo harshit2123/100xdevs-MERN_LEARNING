@@ -1,0 +1,14 @@
+{
+  "name": "week1",
+  "version": "1.0.0",
+  "main": "anagram.js",
+  "scripts": {
+    "test-anagram": "node anagram.js",
+    "test-expenditure-analysis": "node expenditure-analysis",
+    "test-isPalindrome": "node palindrome.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

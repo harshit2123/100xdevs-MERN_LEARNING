@@ -1,0 +1,7 @@
+var count = 0;
+function printCounter() {
+  console.clear();
+  console.log(count);
+  count++;
+}
+setInterval(printCounter, 1000);

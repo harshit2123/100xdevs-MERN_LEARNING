@@ -13,7 +13,8 @@ function sumfn(counter) {
 }
 
 app.get("/handlesum", (req, res) => {
-  var calculatedsum = sumfn(100);
+  var counter = req.query.counter;
+  var calculatedsum = sumfn(counter);
   var result = "The sum is " + calculatedsum;
   res.send(result);
 });

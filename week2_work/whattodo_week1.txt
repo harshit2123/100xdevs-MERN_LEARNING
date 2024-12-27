@@ -15,8 +15,18 @@
 7. Here you can also pass the counter as 
   http://localhost:3000/handlesum?counter=1000&countercounter=2
   here query param is sent after ?, and 2 varibles in clunter
-   
+8. To pass the code as query param
 
+  var counter = req.query.counter; 
+  the main funda is (req.query.), it is then taking the counter after dot and storing in the counter both are the same variable you created
+  var calculatedsum = sumfn(counter);
+
+9. There are 4 types of requests Method
+   POST PUT GET DELETE
+   anything that you type on browser and sent is bydefault a get request
+
+10. 
+ 
 
 
 
@@ -51,3 +61,6 @@ fs.writeFile("initialfiledata.txt", newdata,callbackfn);
 
 Method - 2 (go to expressjs.com)
     copy and paste it directly
+
+3. to read from the query param
+  var VARIABLE_NAME = req.qery.VARIABLE_NAME    

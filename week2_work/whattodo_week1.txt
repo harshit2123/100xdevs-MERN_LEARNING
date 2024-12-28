@@ -12,9 +12,9 @@
 
 6. you can change the routes in the app.get('/handlesum')
 
-7. Here you can also pass the counter as 
-  http://localhost:3000/handlesum?counter=1000&countercounter=2
-  here query param is sent after ?, and 2 varibles in clunter
+7.  Here you can also pass the counter as 
+    http://localhost:3000/handlesum?counter=1000&countercounter=2
+    here query param is sent after ?, and 2 varibles in clunter
 8. To pass the code as query param
 
   var counter = req.query.counter; 
@@ -25,11 +25,78 @@
    POST PUT GET DELETE
    anything that you type on browser and sent is bydefault a get request
 
-10. 
+10. Now the way to get data from header is req.headers.counter....
+    similar as query but in headers you dont need to send the counter through url
+
+
+11. Now To send data through body - before this we need to learn about middlewares
+        middlewares = Way to caputures the request before getting it to your express server
+        middlewares help you caputures the global things you want to do , befor ethe actual handler is called
+        middleware in node.js takes 3 inputs, (req, res and next) 
  
+        function middleware1(req, res, next) {
+        console.log("from middleware" + req.headers.counter);
+        next();
+        }
+        app.use(middleware1);
+
+        // after sometime we do req.body.counter as we did for the headers and query params, but this will give you undefined
+        as express doesnt give you body out of the box. But there are external libraries, to extract the body - called bodyparser
 
 
+        var bodyParser = require('body-parser')
+        app.use(bodyParser.json());
 
+12. res.status(402).send(answer) // means you can change the status reponse, according to you
+    and in that 200 (ok) is by default
+
+11. Until now you have been sending the response as a simple text, now lets learn about the 
+    how to send HTML and JSON reponses.
+
+12. res.send(`html code`) = for the html response
+    or res.sendFile(__dirname + "/.index.html)
+
+
+13 . how can we sendd json 
+  var answerobject = {
+      sum: calculatedsum,
+      mul: calculatedmul,
+    };
+
+    res.status(200).send(answerobject);
+    // make the object and send it through send. 
+
+
+14. Quick Refersher on promises
+
+    Method 1:- 
+          function fileRead(err,data){
+            console.log(data);
+          }
+          fs.readFile("a.txt","utf-8",fileRead);
+
+    Method 2:- 
+          function fileRead(err,data){
+            console.log(data);
+          }
+          fs.readFile("a.txt","utf-8").then(fileRead);   
+
+15. Now even NODE.JS PROCESS can Also Talk to other NODE.JS PROCESSes
+    with the help of fetch library
+    The secondProcess.js is basically working as your browser, where instaed of searchtab, you are  writing in the fetch library
+
+   Now how can we send a body throug that ((remember this sia promise , so you need to do  .then after that))
+        function logResponseBody(jsonBody) {
+          console.log(jsonBody);
+        }
+
+        function callback(result) {
+          result.json().then(logResponseBody);
+        }
+
+        var sendObj = {
+          method: "GET",
+        };
 
 
 
@@ -64,3 +131,13 @@ Method - 2 (go to expressjs.com)
 
 3. to read from the query param
   var VARIABLE_NAME = req.qery.VARIABLE_NAME    
+
+
+4. lib to extract body from json, as express doesnt directly provide you
+
+ var bodyParser = require('body-parser')
+ app.use(bodyParser.json());
+
+ Here bodyParser.json basically returns a middleware that extracts the body
+
+5. Fetch library - this return us a promise

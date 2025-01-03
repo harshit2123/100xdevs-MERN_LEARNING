@@ -1,0 +1,1 @@
+1. learnt about how to build the todoServer

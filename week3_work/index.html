@@ -1,0 +1,31 @@
+<head>
+<title>
+    Todo App
+</title>
+<script>
+    function onPress(){
+        // alert("yo");
+        function parsedResponse(data){
+       console.log(data);
+        }
+        function callback(){
+               resp.json().then(parsedResponse)    
+        }
+        fetch("http://localhost:3000/todos",{
+            method:"GET"
+        }).then(callback)
+    }
+
+</script>
+<body>
+    Todo Title
+
+    <input type = "text" id = "title"></input>
+    <br>
+    Todo Description
+   
+    <input type = "text" id = "description"></input>
+    <br>
+    <button onclick="onPress()"> save Todo </button>
+</body>
+</head>

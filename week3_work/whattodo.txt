@@ -1,1 +1,52 @@
 1. learnt about how to build the todoServer
+2. Learing about how to store your data in files, otherwise , it will be lost somewhere
+   Can make any file (todos.json or todos.txt) to read the data from the file
+3. here , what is JSON.Parse in "   res.json(JSON.parse(data)); "
+
+// this is when you read from the file
+
+  whenever you read from a file you do it in the form of text format, everything is kinda like treated as a string,
+  if for an empty array, it will be like 
+   var a = "[]", so to make sure to return a JSON we need to parse it,
+   as you know, you can return a string, JSON, and HTML
+
+// when you writye from the file  - have to stringify it
+ fs.writeFile("todos.json", JSON.stringify(todos),(err)=>{
+    if(err) throw err;
+    res.status(201).json(newTodo);
+ })
+
+
+ 4. Client side javascript is written inside the script tag
+ - resp.json means calling the json
+ - ideally the fetch promise is called onLoad not on onPress
+
+ 5. the fs library is not a clean one
+       function parsedResponse(data){
+             console.log(data);
+        }
+
+        function callback(){
+               resp.json().then(parsedResponse)    
+        }
+        fetch("http://localhost:3000/todos",{
+            method:"GET"
+        }).then(callback)
+
+
+6. Learnt About CORS errors   - to prevent our backend to receive requests form the unmentioned sourse
+    for the Cors eror to remove
+  Method1-  send that file also where you want the respose
+    app.get("/", (req, res) => {
+    res.sendFile(this.path.join(__dirname, "index.html"));
+    });     
+
+  Method 2 - Available your backend for any requests
+    npm install Cors
+    const cors = require("cors")
+
+7. everytime when you are sending a post request to the server, to ensure it it is a JSON
+u send some info in header
+            headers: {
+                    "Content-Type": "application/json"
+                     }    

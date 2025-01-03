@@ -1,8 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const path = require("path");
 const port = 3000;
+const cors = require("cors");
 
+app.use(cors());
 app.use(bodyParser.json());
 
 let todos = [];
@@ -61,12 +64,16 @@ app.delete("/todos/:id", (req, res) => {
   }
 });
 
-app.use((req, res) => {
-  res.status(404).send();
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// app.use((req, res) => {
+//   res.status(404).send();
+// });
+
 // Export app for testing
-module.exports = app;
+// module.exports = app;
 
 // Start server
 if (require.main === module) {

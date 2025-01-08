@@ -20,6 +20,12 @@ function removeAtIndex(arr, index) {
   }
   return newArray;
 }
+app.get('/todos', (req, res) => {
+  fs.readFile("todos.json", "utf8", (err, data) => {
+    if (err) throw err;
+    res.json(JSON.parse(data));
+  });
+});
 
 app.get('/todos', (req, res) => {
   fs.readFile("todos.json", "utf8", (err, data) => {

@@ -25,7 +25,7 @@ app.get('/todos', (req, res) => {
     if (err) throw err;
     res.json(JSON.parse(data));
   });
-});
+}); 
 
 app.get('/todos', (req, res) => {
   fs.readFile("todos.json", "utf8", (err, data) => {

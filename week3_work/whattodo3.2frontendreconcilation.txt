@@ -2,4 +2,72 @@
    were written before 2014
    - It will create a very nice foundation
     *** Knowing About reconcilation - why and where react uses it
-    
+
+    in whattodo.txt you have written alot of logic and a lot of codes----Frames like view and react 
+    came to hide the complexity....What if we dont have to worry about the append child , create child....
+
+    What if we have just one variable and we just have to work for the calling
+
+
+  Reconcilation- It is the process of react or view for taking the update and translating  it to the dom by calling append child and create child
+
+  ---Lets create a reconciler of our own
+
+  function createDomElements(data){
+         var parentElement = document.getElementById("mainArea");
+        parentElement.innerHTML = ""; // ✅ Clear old content before adding new ones
+
+        for (var i = 0; i < data.length; i++) {
+          var childElement = document.createElement("div");
+          childElement.id = data[i].id; // ✅ Set ID directly without "todo-"
+
+          var grandChildElement1 = document.createElement("span");
+          grandChildElement1.innerHTML = data[i].title + " ";
+
+          var grandChildElement2 = document.createElement("span");
+          grandChildElement2.innerHTML = data[i].description + " ";
+
+          var grandChildElement3 = document.createElement("button");
+          grandChildElement3.innerHTML = "Delete";
+          grandChildElement3.setAttribute(
+            "onclick",
+            "deleteTodo(" + data[i].id + ")"
+          );
+
+          childElement.appendChild(grandChildElement1);
+          childElement.appendChild(grandChildElement2);
+          childElement.appendChild(grandChildElement3);
+
+          parentElement.appendChild(childElement);
+        }
+  }
+
+  createDomElements([{
+   title:"go to gym",
+   description:"go gym daily"
+
+  }])
+
+  /// the above function will craete the values....
+
+    ----in the simar way react has alot of functions in which it have alot of append child , remove child...whatever
+    and you give the react the state  and it handles , how to handle what to handle...
+    What was the existing state , and what to and how to move from current state to existing state is called reconcilation.
+
+
+
+    Now if you call the function again and again remove all the elements then insert all...that is not a optimised way to do it
+    Now react does for you it checks the difference between the previous state and current state and updates the UI
+
+    beacuse of react , you wont see everything go away and coming , you will only see one item getting go away
+
+
+
+
+    Assignment---- Write a reconciler of your own which can handle all the state transitions like update , delete add...
+                   based on the ids figure out the difference between 2 arrays(before and after ), figure out what rows to be eleiminated updated 
+                   and only call the right set of update child , append child .....
+                   Reconciler is kind of a transition to the new state.
+                   Virtual DOM is what react uses and reconcilatoin is the process by which it replaces the data
+
+   -----The above is kind of react Librabry like react.                

@@ -11,6 +11,7 @@
 
         for (var i = 0; i < data.length; i++) {
           var childElement = document.createElement("div");
+          childElement.id = data[i].id; // ✅ Set ID directly without "todo-"
 
           var grandChildElement1 = document.createElement("span");
           grandChildElement1.innerHTML = data[i].title + " ";
@@ -20,9 +21,10 @@
 
           var grandChildElement3 = document.createElement("button");
           grandChildElement3.innerHTML = "Delete";
-          grandChildElement3.onclick = function () {
-            deleteTodo(data[i].id); // Call delete function
-          };
+          grandChildElement3.setAttribute(
+            "onclick",
+            "deleteTodo(" + data[i].id + ")"
+          );
 
           childElement.appendChild(grandChildElement1);
           childElement.appendChild(grandChildElement2);
@@ -59,16 +61,27 @@
           .then((response) => response.json())
           .then((data) => {
             console.log("Todo Saved:", data);
-            getData(); // ✅ Refresh the todo list after saving
+            getData();
           })
           .catch((error) => console.error("Error Saving Todo:", error));
       }
 
+      function deleteDone(id) {
+        console.log("delete Done");
+        var element = document.getElementById(id);
+        if (element) {
+          element.parentNode.removeChild(element);
+        } else {
+          console.log("Nothing to delete");
+        }
+      }
+
       function deleteTodo(id) {
-        fetch(`http://localhost:3000/todos/${id}`, {
+        console.log("Deleting ID:", id);
+        fetch("http://localhost:3000/todos/" + id, {
           method: "DELETE",
         })
-          .then(() => getData()) // ✅ Refresh list after deletion
+          .then(() => deleteDone(id))
           .catch((error) => console.error("Error Deleting Todo:", error));
       }
 
@@ -85,7 +98,6 @@
     <button onclick="onPress()">Save Todo</button>
 
     <h2>Todo List</h2>
-    <pre id="mainArea"></pre>
-    <!-- JSON output area -->
+    <div id="mainArea"></div>
   </body>
 </html>

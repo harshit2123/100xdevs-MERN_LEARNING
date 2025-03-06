@@ -150,6 +150,7 @@ u send some info in header
 
           var grandChildElement3 = document.createElement("button");
           grandChildElement1.innerHTML = "Delete"
+          grandChildElement3.setAttribute("oneclick",)
 
          childElement.appendChild(grandChildElement1)
          childElement.appendChild(grandChildElement2)
@@ -158,4 +159,28 @@ u send some info in header
         parentElement.appendChild(childElement);
         }
 
+
+14. Now How would you add functioning in the structure like grandchild and all...
+     -- var grandChildElement4 = document.createElement("button")
+        grandChildElement4
+        <button></button>
+     -- var grandChildElement3 = document.createElement("button");
+          grandChildElement3.innerHTML = "Delete";
+          grandChildElement3.setAttribute(
+            "onclick",
+            "deleteTodo(" + data[i].id + ")"
+          );
+
+
+
+15. For removing any div --
+    function deleteDone(id) {
+        console.log("delete Done");
+        var element = document.getElementById(id);
+        if (element) {
+          element.parentNode.removeChild(element);
+        } else {
+          console.log("Nothing to delete");
+        }
+      }
         

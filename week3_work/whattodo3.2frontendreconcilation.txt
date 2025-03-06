@@ -1,5 +1,5 @@
 1. Building dynamic frontend application with only vanilla js and check how front end application
    were written before 2014
    - It will create a very nice foundation
-    *** Knowing About reconcilation - why react was used
+    *** Knowing About reconcilation - why and where react uses it
     

@@ -1,31 +1,91 @@
-<head>
-<title>
-    Todo App
-</title>
-<script>
-    function onPress(){
-        // alert("yo");
-        function parsedResponse(data){
-       console.log(data);
-        }
-        function callback(){
-               resp.json().then(parsedResponse)    
-        }
-        fetch("http://localhost:3000/todos",{
-            method:"GET"
-        }).then(callback)
-    }
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <script>
+      function todosCallback(data) {
+        var parentElement = document.getElementById("mainArea");
+        parentElement.innerHTML = ""; // ✅ Clear old content before adding new ones
 
-</script>
-<body>
-    Todo Title
+        for (var i = 0; i < data.length; i++) {
+          var childElement = document.createElement("div");
 
-    <input type = "text" id = "title"></input>
-    <br>
-    Todo Description
-   
-    <input type = "text" id = "description"></input>
-    <br>
-    <button onclick="onPress()"> save Todo </button>
-</body>
-</head>
+          var grandChildElement1 = document.createElement("span");
+          grandChildElement1.innerHTML = data[i].title + " ";
+
+          var grandChildElement2 = document.createElement("span");
+          grandChildElement2.innerHTML = data[i].description + " ";
+
+          var grandChildElement3 = document.createElement("button");
+          grandChildElement3.innerHTML = "Delete";
+          grandChildElement3.onclick = function () {
+            deleteTodo(data[i].id); // Call delete function
+          };
+
+          childElement.appendChild(grandChildElement1);
+          childElement.appendChild(grandChildElement2);
+          childElement.appendChild(grandChildElement3);
+
+          parentElement.appendChild(childElement);
+        }
+      }
+
+      function getDatacallback(resp) {
+        resp
+          .json()
+          .then(todosCallback)
+          .catch((error) => console.error("JSON Parsing Error:", error));
+      }
+
+      function getData() {
+        fetch("http://localhost:3000/todos", {
+          method: "GET",
+        })
+          .then(getDatacallback)
+          .catch((error) => console.error("Fetch Error:", error));
+      }
+
+      function onPress() {
+        var title = document.getElementById("title").value;
+        var description = document.getElementById("description").value;
+
+        fetch("http://localhost:3000/todos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title, description }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Todo Saved:", data);
+            getData(); // ✅ Refresh the todo list after saving
+          })
+          .catch((error) => console.error("Error Saving Todo:", error));
+      }
+
+      function deleteTodo(id) {
+        fetch(`http://localhost:3000/todos/${id}`, {
+          method: "DELETE",
+        })
+          .then(() => getData()) // ✅ Refresh list after deletion
+          .catch((error) => console.error("Error Deleting Todo:", error));
+      }
+
+      document.addEventListener("DOMContentLoaded", getData);
+    </script>
+  </head>
+  <body>
+    <h2>Todo Title</h2>
+    <input type="text" id="title" />
+    <br />
+    <h2>Todo Description</h2>
+    <input type="text" id="description" />
+    <br />
+    <button onclick="onPress()">Save Todo</button>
+
+    <h2>Todo List</h2>
+    <pre id="mainArea"></pre>
+    <!-- JSON output area -->
+  </body>
+</html>

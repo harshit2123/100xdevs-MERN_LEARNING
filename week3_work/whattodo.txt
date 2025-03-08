@@ -109,3 +109,78 @@ u send some info in header
     but here one problem i sthat , when i send  the data it does update in backend , but it doesnt updat eon frontend
     everytime we nhave to refresh it.....
     
+
+
+
+13.   To insert the html automatically according to the incoming data.
+
+      var a = document.createElement("div")
+      undefined
+
+     a // when you log a , then you get this , but this is not inserted in the HTML, You can create thousands of more , but it wont be inserted in the real html
+     <div><div>
+     ---Now to insert it into the real html body , you need to do...
+     document.getElementById("mainArea").appendChild(a)
+
+     so we use the above concept in this manner ---
+      for (var i = 0; i < data.length; i++) {
+          var childElement = document.createElement("div");
+          childElement.innerHTML = data[i].title;
+          parentElement.appendChild(childElement);
+        }
+     // To fill the values automatically with javascript into the html , without human creating it
+     --- Now we also need to structure it...like 
+     <div> ---1
+          <span>go to gym</span>
+          <span> I need to hit the gym </span>
+          <button> delete </button>
+     </div>   
+     --- Now to do this we need to give 1 step deeper...like the 1 part is the child then we need to cretae a grand child for it 
+     ex. ->
+     
+     for (var i = 0; i < data.length; i++) {
+          var childElement = document.createElement("div");
+
+
+          var grandChildElement1 = document.createElement("span");
+          grandChildElement1.innerHTML = data[i].title
+
+          var grandChildElement2 = document.createElement("span");
+          grandChildElement1.innerHTML = data[i].description
+
+          var grandChildElement3 = document.createElement("button");
+          grandChildElement1.innerHTML = "Delete"
+          grandChildElement3.setAttribute("oneclick",)
+
+         childElement.appendChild(grandChildElement1)
+         childElement.appendChild(grandChildElement2)
+         childElement.appendChild(grandChildElement3)
+
+        parentElement.appendChild(childElement);
+        }
+
+
+14. Now How would you add functioning in the structure like grandchild and all...
+     -- var grandChildElement4 = document.createElement("button")
+        grandChildElement4
+        <button></button>
+     -- var grandChildElement3 = document.createElement("button");
+          grandChildElement3.innerHTML = "Delete";
+          grandChildElement3.setAttribute(
+            "onclick",
+            "deleteTodo(" + data[i].id + ")"
+          );
+
+
+
+15. For removing any div --
+    function deleteDone(id) {
+        console.log("delete Done");
+        var element = document.getElementById(id);
+        if (element) {
+          element.parentNode.removeChild(element);
+        } else {
+          console.log("Nothing to delete");
+        }
+      }
+        

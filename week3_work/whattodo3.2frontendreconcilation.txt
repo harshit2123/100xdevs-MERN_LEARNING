@@ -71,3 +71,13 @@
                    Virtual DOM is what react uses and reconcilatoin is the process by which it replaces the data
 
    -----The above is kind of react Librabry like react.                
+
+
+
+
+   ///////Week 3.4 somwthing......
+Up Untill now we were storing data in files , for example , if we save courses then courses.json was getting populated
+So For Method @ - We are going to go for 04-course-app-hard...Using databases to store data vs storing data in files.
+So We are going for 04- course - hard for that
+
+-- Theere are various ways to get connected to the databases - MongoDb Compass

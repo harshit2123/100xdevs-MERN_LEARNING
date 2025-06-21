@@ -1,0 +1,56 @@
+1. Nodejs is a javascript runtime. ->Its like a IDE which Helps us Run javascript in the browser
+2. Google Chrome-> Has V8 Engine Which Helps us Run Javascript in the browser
+3. Now we have another new Popular Javascript Runtime Environment -> BUN -> Which is written in a language called Zig.
+   Bun is 1000 times of faster than Node.js but right now all the next.js things doesnt work with bun so not everybody is working with it.
+   (Kind of Global Standards)ECMASCRIPT ->NODE.js
+                                        ->BUN
+                                        -> Google Chrome/safari
+    
+    Question :- why is javascript Runtime Different From Browser Runtime
+             -> JavaScript works differently in the browser and Node.js because each adds its own features—browsers add things like the DOM, 
+                 while Node.js adds server tools like file access.
+
+    Initializing a Node.js Project
+    1. npm init -y
+       -> There is some config file in the left-> package.json -> name(Name of your website/app/library), version(current version) , main(Entrypoint) ->(For which we will get to know much when we register our code in the npm registry)
+       -> scripts- "scripts":{ (Dev specifies scripts).
+                    "start":index.js
+                    },
+
+                    -> So for starting your project you can also do , npm node index.js or you can run "npm start"-> This will automaticaly run the index.js as it is defined in the scripts
+
+
+
+4. npm -> node package manager-> it lets you get external dependencies/package to your code.
+                              -> we use  alot of npm like 1. npm init(for initialization), 2. npm run tests(Running scripts), 3. npm run chalk(Installing external dependencies)
+
+5. There a  lot of libraries which are using latest standard by ECMA -> They might need index.mjs file instaed of index.js file. 
+6. This chalk library is kind of a console.log thing, it just lets you log things in a colorful manner.
+Internal Packages-> The packages that the nodes.js provide you from the box-> Like the .fs -> const fs= require("fs").
+
+
+
+const path =  require("path")
+console.log(__dirname)-> It helps you see the directorey you are in currently.
+-> There is this path(its resolve the path to simpleset path) library whih is providede by the nodejs itself , which helps ypou joi different paths
+ex:-> console.log(path.join(__dirname,"./index.js","".......))
+
+7. You don't commit your node modules to github , its just that you sent the dependencies from the package.json > run -> nom i -> Node modules will automatically gets installed , 
+you dont have to send that chunky big folder for  the node modules which conatins all the relavant packages.
+
+8. Question is what is ? ^0.0.0 -> a.b.c -> MAJOR.MINOR.PATCH, This is called semantic versioning
+                           MAJOR-> It indicates the significant change or breaking change-> kind of like a lot of big and important changes in a backward compatible manner
+                           MINOR-> t indicates what might have smaller changes
+                           PATCH-> It can be said like bug fixes.
+                           ^(carrot) -> This fixes the major version , like if its 5 then it will not be moved. others can be updated when you do npm i, 
+
+             package-lock.json -> It makes Sure That its like a lock for the particualr version , what happens if there is a lot of developers , so to make sure evryone have the same version , 
+             even if everyone have different versions , then everybody will have the same versions.
+             -> You should always push the lock file ,thats kind of a good practice as it will help everybody to have the same version.
+
+
+<---------->>>>>> Now The Assignment is make a CLI -> For node.js you can make such a librray or CLI by commander.js
+
+
+
+

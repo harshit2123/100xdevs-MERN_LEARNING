@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const adminRouter = new Router();
 
-adminRouter.use(admiMiddleware)
+// adminRouter.use(admiMiddleware)
 
 adminRouter.post("/signup", function(req,res){
     res.json({
